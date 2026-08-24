@@ -1,33 +1,21 @@
 #ifndef __PARSER__H__
 #define __PARSER__H__
 
-enum c_type_type {
-    C_TYPE_NONE,
-    C_TYPE_ERR,
-    C_TYPE_VOID,
-    C_TYPE_INT,
-    C_TYPE_CHAR,
-    C_TYPE_FLT,
-    C_TYPE_PTR,
-    C_TYPE_ARRAY,
-    C_TYPE_STRUC_OR_UNION,
+#include <stddef.h>
+#include "main.h"
 
+
+enum ast_expr_type {
+    AST_EXPR_VREF,
+    AST_EXPR_UNARY,
+    AST_EXPR_BINARY,
+    AST_EXPR_CALL,
+    AST_EXPR_CONSTANT,
 };
 
-struct c_type {};
-
-enum c_storage {
-    C_STORAGE_NONE,
-    C_STORAGE_STATIC,
-    C_STORAGE_AUTO,
-    C_STORAGE_REGISTER,
-    C_STORAGE_TYPEDEF,
-    C_STORAGE_EXTERN,
+struct ast_expr {
+    enum ast_expr_type type;
 };
-
-struct c_var {};
-
-struct ast_expr {};
 
 enum ast_stmt_type {
     AST_STMT_EMPTY,
@@ -36,10 +24,28 @@ enum ast_stmt_type {
     AST_STMT_DECL,
 };
 
-struct ast_stmt {
-
+struct ast_decl {
+    struct c_var *var;
+    struct ast_node *val;
 };
 
+union ast_stmt_val {
+    struct ast_expr expr;
+};
+
+struct ast_stmt {
+    enum ast_stmt_type type;
+    union ast_stmt_val value;
+};
+
+struct ast_decl_list {
+    struct ast_decl *val;
+    size_t len;
+};
+
+struct ast {
+    struct ast_decl_list decls;
+};
 
 void parse_tree(void);
 

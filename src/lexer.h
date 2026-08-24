@@ -1,7 +1,9 @@
 #ifndef __LEXER__H__
 #define __LEXER__H__
 
-struct token {};
+struct token {
+    
+};
 
 extern struct token token;
 
