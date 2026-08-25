@@ -32,7 +32,7 @@ enum c_storage {
 
 struct c_var {
     struct c_type type;
-    struct c_storage storage;
+    enum c_storage storage;
 };
 
 struct c_var_list {
@@ -53,4 +53,16 @@ struct c_const {
     union c_const_val val;
 };
 
+struct c_const_list {
+    struct c_const *val;
+    size_t len;
+};
+
+struct str_list {
+    char *val;
+    size_t len;
+};
+
+extern struct c_const_list constants;
+extern struct str_list identifiers;
 #endif

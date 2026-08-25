@@ -13,6 +13,22 @@ enum ast_expr_type {
     AST_EXPR_CONSTANT,
 };
 
+struct ast_expr_list {
+    struct ast_expr *val;
+    size_t len;
+};
+
+struct ast_un_op {
+    
+    struct ast_expr *expr;
+};
+
+struct ast_bi_op {
+
+};
+
+struct ast_call {};
+
 struct ast_expr {
     enum ast_expr_type type;
 };
