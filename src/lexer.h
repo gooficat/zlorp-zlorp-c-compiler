@@ -1,16 +1,8 @@
 #ifndef __LEXER__H__
 #define __LEXER__H__
 
+#include "tokens.h"
 #include <stdio.h>
-
-enum token_type {
-#define TK(id, str) TK_##id,
-#include "token.h"
-  TK_IDENT,
-  TK_CONST,
-  TK_EOF,
-#undef TK
-};
 
 struct token {
   enum token_type type;
