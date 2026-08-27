@@ -1,3 +1,3 @@
-## Zlorp Zlorp C Compiler (ZZCC)
+# Zlorp Zlorp C Compiler (ZZCC)
 
 This is a C compiler designed for the x86 line of processors. It compiles exclusively the C89 standard of C. The goal is to be a part of an ecosystem that will replace GNU, and act as a suite of tools for my ultra-light operating system project. I felt that GNU / Linux as a whole had become too bloated considering the immense amount of power that modern computer systems are capable of wielding.

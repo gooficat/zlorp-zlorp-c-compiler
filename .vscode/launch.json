@@ -9,7 +9,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceRoot}/bin/${workspaceFolderBasename}",
-			"console": "integratedTerminal",
+			"console": "internalConsole",
 			"internalConsoleOptions": "openOnSessionStart",
 			"args": [],
 			"cwd": "${workspaceRoot}",
