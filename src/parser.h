@@ -39,11 +39,6 @@ enum ast_stmt_type {
 	AST_STMT_DECL,
 };
 
-struct ast_decl {
-	struct c_var *var;
-	struct ast_node *val;
-};
-
 struct ast_stmt_list {
 	struct ast_stmt *val;
 	size_t len;
@@ -69,8 +64,14 @@ struct ast_order {
 	enum ast_order_type type;
 	union ast_order_value val;
 };
+struct ast_decl {
+	struct c_var *var;
+	struct ast_expr val;
+};
+
 union ast_stmt_val {
 	struct ast_expr expr;
+	struct ast_decl decl;
 	struct ast_scope scope;
 };
 
@@ -86,6 +87,7 @@ struct ast_decl_list {
 
 struct ast {
 	struct ast_decl_list decls;
+	struct c_var_list vars;
 };
 
 void parse_tree(void);
