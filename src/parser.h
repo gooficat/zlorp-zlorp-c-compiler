@@ -2,6 +2,7 @@
 #define __PARSER__H__
 
 #include "main.h"
+#include "pool.h"
 #include <stddef.h>
 
 enum ast_expr_type {
@@ -12,19 +13,20 @@ enum ast_expr_type {
 	AST_EXPR_CONSTANT,
 };
 
+enum c_op {
+	OP_ADDR,
+	OP_DEREF,
+};
+
 struct ast_expr_list {
 	struct ast_expr *val;
 	size_t len;
 };
 
-struct ast_un_op {
-
+struct ast_op {
+	enum c_op op;
 	struct ast_expr *expr;
 };
-
-struct ast_bi_op {};
-
-struct ast_call {};
 
 struct ast_expr {
 	enum ast_expr_type type;
@@ -42,8 +44,34 @@ struct ast_decl {
 	struct ast_node *val;
 };
 
+struct ast_stmt_list {
+	struct ast_stmt *val;
+	size_t len;
+};
+
+struct ast_scope {
+	struct ast_stmt_list body;
+	struct str_list labels;
+	struct c_var_list vars;
+};
+
+enum ast_order_type {
+	AST_ORDER_RETURN,
+	AST_ORDER_GOTO,
+};
+
+union ast_order_value {
+	struct ast_expr *ret;
+	char *lab;
+};
+
+struct ast_order {
+	enum ast_order_type type;
+	union ast_order_value val;
+};
 union ast_stmt_val {
 	struct ast_expr expr;
+	struct ast_scope scope;
 };
 
 struct ast_stmt {
